@@ -1,5 +1,10 @@
 # EklFrontend
 
+disable cross origin resouce share (CORS) in chrome
+```
+chrome.exe --disable-web-security --disable-gpu --user-data-dir=~/chromeTemp
+```
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.3.
 
 ## Development server
