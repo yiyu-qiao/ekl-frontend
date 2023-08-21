@@ -1,8 +1,9 @@
 export interface User {
-
   username: string;
-  name: string;
   firstname: string;
-  password: string;
+  familyname: string;
   birthday: string;
+  password: string;
+  token: string;
+  role: string[];
 }

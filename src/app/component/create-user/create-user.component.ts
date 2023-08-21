@@ -23,7 +23,7 @@ export class CreateUserComponent {
       validators: [Validators.required, Validators.email]
     }),
     firstname: new FormControl(),
-    name: new FormControl(),
+    familyname: new FormControl(),
     password: new FormControl('',{
       nonNullable:true,
       validators:[Validators.required, Validators.minLength(5)]
@@ -43,7 +43,9 @@ export class CreateUserComponent {
 
   createUser(){
     const newUser: User = {
-      ...this.createUserForm.getRawValue()
+      ...this.createUserForm.getRawValue(),
+      token: '',
+      role: []
     };
     this.createUserSubmitted.emit(newUser);
     console.log('CreateUserComponent', 'Finish create new User:', newUser);

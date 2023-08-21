@@ -1,0 +1,17 @@
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+  <div class="form-group">
+    <label for="username">Email</label>
+    <input [formControl]="c.username" type="text" class="form-control" id="username">
+    <div *ngIf="hasError(c.username, 'required')" class="feedback-error">Email is required</div>
+    <div *ngIf="hasError(c.username, 'email')" class="feedback-error">Email is invalid</div>
+
+  </div>
+  <div>
+    <label for="password">Password</label>
+    <input [formControl]="c.password" type="password" class="form-control" id="password">
+    <div *ngIf="hasError(c.password,'required')" class="feedback-error">Password is required</div>
+    <div *ngIf="hasError(c.password,'minlength')" class="feedback-error">Password must longer than 5 charactors</div>
+  </div>
+
+  <button [disabled]="loginForm.invalid" type="submit" class="btn btn-primary mb-4">login</button>
+</form>
