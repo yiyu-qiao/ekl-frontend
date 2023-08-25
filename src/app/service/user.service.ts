@@ -14,14 +14,18 @@ export class UserService {
 
 
   saveNewUser(user: User){
-    let url = environment.apiUrl + ApiUrls.CreateNewUser;
-    console.log('UserService.saveNewUser:', user, 'url:' + url);
-    return this.httpClient.put<any>(url,user);
+    // let url = environment.apiUrl + ApiUrls.CreateNewUser;
+    console.log('UserService.saveNewUser:', user, 'url:' + ApiUrls.CreateNewUser);
+    return this.httpClient.put<any>(ApiUrls.CreateNewUser,user);
   }
 
   login(loginRequest: LoginRequest){
-    let url = environment.apiUrl + ApiUrls.Login;
-    console.debug('UserService.login:',loginRequest, 'url:' + url);
-    return this.httpClient.post<User>(url,loginRequest);
+    console.debug('UserService.login:',loginRequest, 'url:' + ApiUrls.Login);
+    return this.httpClient.post<User>(ApiUrls.Login,loginRequest);
   }
+
+  public usersGet(){
+    return this.httpClient.get<User[]>(ApiUrls.AllUser);
+  }
+
 }

@@ -44,6 +44,7 @@ export class LoginComponent {
     };
     this.userService.login(loginRequest).subscribe(user => {
       this.loginUser = user;
+      sessionStorage.setItem('login_user',JSON.stringify(user));
       console.log('LoginComponent.login:',this.loginUser);
       });
     this.loginForm.reset();
