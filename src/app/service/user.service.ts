@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {User} from "../model/user";
 import {environment} from "../../environments/environment";
 import {ApiUrls} from "../model/api-urls";
@@ -25,6 +25,17 @@ export class UserService {
   }
 
   public usersGet(){
+    let token = sessionStorage.getItem('login_user');
+    if(token){
+      let loginUser = JSON.parse(token);
+      if(loginUser && loginUser.token){
+        const header:HttpHeaders  = new HttpHeaders({
+          Authorization: `Bearer ${loginUser.token}`
+        });
+      return this.httpClient.get<User[]>(ApiUrls.AllUser,{headers: header });
+      }
+    }
+
     return this.httpClient.get<User[]>(ApiUrls.AllUser);
   }
 

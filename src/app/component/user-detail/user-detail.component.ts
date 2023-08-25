@@ -16,7 +16,10 @@ export class UserDetailComponent {
 
   constructor() {
     console.log('UserDetailComponent.constructor:', this.user);
+  }
 
+  ngOnInit(){
+    console.log('UserDetailComponent.ngOnInit:', this.user);
   }
 
 
