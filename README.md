@@ -4,6 +4,10 @@ disable cross origin resouce share (CORS) in chrome
 ```
 chrome.exe --disable-web-security --disable-gpu --user-data-dir=~/chromeTemp
 ```
+Start with proxy configuration
+```
+ng serve --proxy-config src/proxy.conf.json
+```
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.3.
 
