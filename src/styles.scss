@@ -1,3 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-//@import 'bootstrap/scss/bootstrap';
-@import '@angular-schule/workshop-styles/index';
+//@import '@angular-schule/workshop-styles/index';
+
+@import 'bootstrap/scss/bootstrap';
+@import "scss/button.scss";
+@import "scss/form-control.scss";

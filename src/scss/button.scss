@@ -1,0 +1,35 @@
+button[disabled] {
+    cursor: not-allowed;
+}
+
+.btn- {
+    &red {
+        @extend .btn;
+        @extend .me-2;
+        @extend .btn-danger;
+    }
+
+    &green {
+        @extend .btn;
+        @extend .me-2;
+        @extend .btn-success;
+    }
+
+    &grey {
+        @extend .btn;
+        @extend .me-2;
+        @extend .btn-secondary;
+    }
+
+    &yellow {
+        @extend .btn;
+        @extend .me-2;
+        @extend .btn-warning;
+    }
+
+    &blue {
+        @extend .btn;
+        @extend .me-2;
+        @extend .btn-primary;
+    }
+}
