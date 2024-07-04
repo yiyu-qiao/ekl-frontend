@@ -18,6 +18,7 @@ export class AdministratorComponent {
   createUser: User|undefined;
 
   createNewUser(user: User){
+    console.log('AdministratorComponent', 'CreateNewUser', user);
     this.userService.saveNewUser(user).subscribe(savedUser => this.createUser);
   }
 
