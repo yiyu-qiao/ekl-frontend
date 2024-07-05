@@ -1,6 +1,8 @@
 {
   "/api/*": {
-    "target": "http://localhost:8080",
-    "secure": false
+    "target": "https://ekl-backend-ws-dev.ponyworld.io",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
   }
 }

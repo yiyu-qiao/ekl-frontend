@@ -36,6 +36,7 @@ export class UserService {
       }
     }
 
+    // let url = environment.apiUrl + ApiUrls.AllUser;
     return this.httpClient.get<User[]>(ApiUrls.AllUser);
   }
 
