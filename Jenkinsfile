@@ -1,6 +1,10 @@
 pipeline {
   agent any
 
+      tools {
+          nodejs 'node-20-15-0'
+      }
+
   stages {
     stage('Init build') {
       steps {
@@ -16,6 +20,7 @@ pipeline {
         script {
           sh """
               id
+
               echo $PATH
               which npm
               which node
