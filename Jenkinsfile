@@ -25,7 +25,7 @@ pipeline {
               npm -v
               node -v
               ng version
-              npm install
+              npm ci
           """
         }
       }
