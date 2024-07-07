@@ -24,7 +24,7 @@ pipeline {
               echo $PATH
               npm -v
               node -v
-              ng -v 
+              ng version
               npm install
           """
         }
