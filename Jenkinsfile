@@ -1,9 +1,9 @@
 pipeline {
   agent any
 
-      tools {
-          nodejs 'node-20.15.0'
-      }
+  tools {
+      nodejs 'node-20.15.0'
+  }
 
   stages {
     stage('Init build') {
@@ -24,6 +24,7 @@ pipeline {
               echo $PATH
               npm -v
               node -v
+              ng -v 
               npm install
           """
         }
