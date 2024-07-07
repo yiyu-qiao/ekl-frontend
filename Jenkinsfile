@@ -16,7 +16,10 @@ pipeline {
         script {
           sh """
               id
-              npm -v 
+              which npm
+              which node
+              echo $PATH
+              npm -v
               npm install
           """
         }
