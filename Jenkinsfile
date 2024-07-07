@@ -15,6 +15,7 @@ pipeline {
       steps {
         script {
           sh """
+              id
               npm install
           """
         }
