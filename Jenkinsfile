@@ -41,17 +41,32 @@ pipeline {
       builtTimestamp= sh(returnStdout:true, script:"date +%Y%m%dT%H%M%S").trim() //remove trailing newline
   }
 
+  parameters {
+      choice(name: 'buildStage', choices: ["dev", "test", "prod"],
+          description: 'select the stage to be built and deployed, default dev')
+  }
+
   stages {
-    stage('Init build') {
+    stage('Init Build') {
       steps {
         script{
            def msg = sh(returnStdout:true, script:"""echo check out from Github Repository ${GIT_URL}
                                                                         echo current branch ${GIT_BRANCH}""")
           echo "Console output: ${msg}"
+
+          echo "Initialize build image ekl-frontend-${params.buildStage}"
+          env.imageTag = "${env.builtTimestamp}"
+          imageRepo = getImageRepository("${params.buildStage}")
+          env.imageName = "${env.registryNamespace}/${imageRepo}:${env.imageTag}"
+         echo "Initialization for build image ${env.imageName} done."
+
+         env.kubeconfig = getKubeconfig("${params.buildStage}")
+         echo "Use kubeconfig ${env.kubeconfig}"
+
         }
       }
     }
-    stage('npm install') {
+    stage('NPM Install') {
       steps {
         script {
           sh """
@@ -61,12 +76,29 @@ pipeline {
       }
     }
 
-    stage('build docker image') {
+    stage('Build Image') {
       steps {
         script {
-          echo "start build docker image"
+          echo "Build docker image ${env.imageName}"
+          sh """
+            docker build -t ${env.imageName} .
+          """
         }
       }
+    }
+
+    stage('Push Image'){
+        steps {
+            echo "Push image ${env.imageName} to Docker Hub"
+            script {
+                docker.withRegistry('','DOCKERHUB_TOKEN_PONYWORLD') {
+                    sh """
+                        docker push ${env.imageName}
+                        docker image rm ${env.imageName}
+                    """
+                }
+            }
+        }
     }
   }
 }
