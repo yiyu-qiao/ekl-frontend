@@ -8,6 +8,6 @@ spec:
   http:
     - route:
         - destination:
-            host: ekl-frontend-dev.ekl-k8s-dev.svc.cluster.local
+            host: ekl-frontend-dev.ekl-dev.svc.cluster.local
             port:
               number: 80
