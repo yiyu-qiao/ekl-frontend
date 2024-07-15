@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ekl-frontend
+spec:
+  selector:
+    matchLabels:
+      app: ekl-frontend
+  template:
+    metadata:
+      labels:
+        app: ekl-frontend
+    spec:
+      containers:
+        - name: ekl-frontend
+          image: ekl-frontend
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              protocol: TCP
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 1
+  progressDeadlineSeconds: 120
+

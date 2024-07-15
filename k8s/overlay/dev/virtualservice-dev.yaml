@@ -1,0 +1,13 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: ekl-frontend
+spec:
+  hosts:
+    - ekl-frontend-dev.ponyworld.io
+  http:
+    - route:
+        - destination:
+            host: ekl-frontend-dev.ekl-k8s-dev.svc.cluster.local
+            port:
+              number: 80

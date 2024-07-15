@@ -100,5 +100,21 @@ pipeline {
             }
         }
     }
+
+    stage('Deploy to ekl-k8s'){
+        steps {
+            echo "Deploy with kubeconfig ${env.kubeconfig}"
+            withKubeConfig([credentialsId: "${env.kubeconfig}"]){
+                sh """
+                    sed -i -e 's/{{IMAGE_TAG}}/${env.imageTag}/g' \
+                        k8s/overlay/${params.buildStage}/kustomization.yaml
+                    export KUBECONFIG=$KUBECONFIG
+                    kubectl apply -k k8s/overlay/${params.buildStage}
+                    kubectl rollout status deployment/ekl-frontend-${params.buildStage}
+                    kubectl get all -n ekl-k8s-dev
+                """
+            }
+        }
+    }
   }
 }
