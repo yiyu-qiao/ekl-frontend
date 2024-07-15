@@ -111,7 +111,7 @@ pipeline {
                     export KUBECONFIG=$KUBECONFIG
                     kubectl apply -k k8s/overlay/${params.buildStage}
                     kubectl rollout status deployment/ekl-frontend-${params.buildStage}
-                    kubectl get all -n ekl-k8s-dev
+                    kubectl get all -n ekl-dev
                 """
             }
         }

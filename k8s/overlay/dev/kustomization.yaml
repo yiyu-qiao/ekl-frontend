@@ -5,7 +5,7 @@ resources:
 nameSuffix: -dev
 namespace: ekl-dev
 commonLabels:
-  app: ekl-frontend
+  app: ekl-frontend-dev
 patches:
   - path: deployment-dev.yaml
   - path: virtualservice-dev.yaml
