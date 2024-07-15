@@ -5,6 +5,11 @@ pipeline {
       nodejs 'node-20.15.0'
   }
 
+  options {
+      timestamps()
+      buildDiscarder(logRotator(numToKeepStr: '5'))
+  }
+
   stages {
     stage('Init build') {
       steps {
@@ -19,12 +24,6 @@ pipeline {
       steps {
         script {
           sh """
-              id
-
-              echo $PATH
-              npm -v
-              node -v
-              ng version
               npm ci
           """
         }
