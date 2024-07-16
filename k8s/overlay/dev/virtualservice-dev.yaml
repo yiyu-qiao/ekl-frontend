@@ -4,7 +4,7 @@ metadata:
   name: ekl-frontend
 spec:
   hosts:
-    - ekl-frontend-dev.ponyworld.io
+    - ekl-dev.ponyworld.io
   http:
     - route:
         - destination:
