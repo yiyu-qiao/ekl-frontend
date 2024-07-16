@@ -81,7 +81,8 @@ pipeline {
         script {
           echo "Build docker image ${env.imageName}"
           sh """
-            docker build -t ${env.imageName} .
+            docker build -t ${env.imageName} \
+            --build-arg EKL_FE_STAGE=${env.buildStage} .
           """
         }
       }
