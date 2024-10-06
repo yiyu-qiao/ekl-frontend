@@ -75,7 +75,15 @@ pipeline {
         }
       }
     }
-
+    stage('NPM Run Build') {
+      steps {
+        script {
+          sh """
+            npm run build
+          """
+        }
+      }
+    }
     stage('Build Image') {
       steps {
         script {
