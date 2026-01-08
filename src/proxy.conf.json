@@ -1,8 +1,0 @@
-{
-  "/api/*": {
-    "target": "https://ekl-backend-ws-dev.ponyworld.io",
-    "secure": false,
-    "logLevel": "debug",
-    "changeOrigin": true
-  }
-}
