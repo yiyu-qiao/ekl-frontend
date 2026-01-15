@@ -1,7 +1,7 @@
 import {computed, inject, Injectable, signal} from '@angular/core';
 import {BehaviorSubject, catchError, map, Observable, of, tap} from "rxjs";
 import {User} from "../model/user";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {Router} from "@angular/router";
 
 @Injectable({
