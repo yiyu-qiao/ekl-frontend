@@ -83,10 +83,10 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "ekl-frontend:build:production"
+              "buildTarget": "ekl-frontend:build:production"
             },
             "development": {
-              "browserTarget": "ekl-frontend:build:development"
+              "buildTarget": "ekl-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -94,7 +94,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ekl-frontend:build"
+            "buildTarget": "ekl-frontend:build"
           }
         },
         "test": {
