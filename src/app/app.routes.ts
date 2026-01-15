@@ -7,7 +7,6 @@ import {ShowUsersComponent} from "./component/show-users/show-users.component";
 import {authGuard} from "./service/auth.guard";
 
 export const routes: Routes = [
-  {path: 'signin', component: LoginComponent},
   {path: '', pathMatch: 'full', redirectTo: 'dashboard'},
   {path: 'dashboard', component: DashboardComponent},
   {path: 'signup', component: CreateUserComponent},

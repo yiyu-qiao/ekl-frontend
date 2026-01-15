@@ -83,6 +83,11 @@ export class AuthService {
   }
 
   private redirectToLogin(): void {
-    this.router.navigate(['/login']);
+    // Öffne Login-Modal statt Navigation
+    const modal = document.getElementById('loginModal');
+    if (modal) {
+      const bsModal = new (window as any).bootstrap.Modal(modal);
+      bsModal.show();
+    }
   }
 }
