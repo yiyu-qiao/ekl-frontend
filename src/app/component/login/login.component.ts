@@ -40,6 +40,7 @@ export class LoginComponent {
   }
 
   loginWithOAuth2() {
-    this.authService.loginWithOAuth2();
+    const redirectUrl = sessionStorage.getItem("redirectUrl") || undefined;
+    this.authService.loginWithOAuth2(redirectUrl);
   }
 }

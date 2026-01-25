@@ -1,8 +1,9 @@
 import {computed, inject, Injectable, signal} from '@angular/core';
-import {BehaviorSubject, catchError, map, Observable, of, tap} from "rxjs";
+import {catchError, map, Observable, of, tap} from "rxjs";
 import {User} from "../model/user";
-import { HttpClient } from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +24,9 @@ export class AuthService {
     this.checkAuthStatus().subscribe();
   }
 
-  loginWithOAuth2(): void {
-    window.location.href = '/oauth2/authorization/authcode';
+  loginWithOAuth2(redirectUrl?: string): void {
+    const url = redirectUrl || window.location.pathname;
+    window.location.href = `${environment.apiUrl}/oauth2/authorization/authcode?redirectUrl=${encodeURIComponent(url)}`;
   }
 
   loginWithCredentials(username: string, password: string): Observable<User> {
@@ -44,11 +46,21 @@ export class AuthService {
         this.userSignal.set(user);
         return true;
       }),
-      catchError(() => {
-        this.userSignal.set(null);
+      catchError(error => {
+        if (error.status === 401) {
+          this.userSignal.set(null);
+        }
         return of(false);
       })
     );
+  }
+
+  private handleRedirectUrl(): void {
+    const redirectUrl = sessionStorage.getItem('redirectUrl');
+    if (redirectUrl) {
+      sessionStorage.removeItem('redirectUrl');
+      this.router.navigateByUrl(redirectUrl);
+    }
   }
 
 
@@ -72,18 +84,18 @@ export class AuthService {
       return of(true);
     }
 
-    return this.checkAuthStatus().pipe(
-      tap(isAuth => !isAuth && this.redirectToLogin())
-    );
+    return this.checkAuthStatus();
   }
 
-  handleUnauthorized(): void {
+  handleUnauthorized(redirectUrl?: string): void {
     this.userSignal.set(null);
-    this.redirectToLogin();
+    this.redirectToLogin(redirectUrl);
   }
 
-  private redirectToLogin(): void {
-    // Öffne Login-Modal statt Navigation
+  private redirectToLogin(redirectUrl?: string): void {
+    if (redirectUrl) {
+      sessionStorage.setItem('redirectUrl', redirectUrl);
+    }
     const modal = document.getElementById('loginModal');
     if (modal) {
       const bsModal = new (window as any).bootstrap.Modal(modal);
