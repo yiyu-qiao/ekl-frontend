@@ -1,17 +1,11 @@
-<div class="container-fluid bg-secondary" role="banner">
-  EKL Header
-  <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#loginModal">
-    Login
-  </button>
-</div>
-<div class="container-fluid bg-light" role="application">
-  <h1>
-    <img width="100" alt="Angular Logo" src="./assets/icons/angular256X256.png"/>
-  </h1>
+<app-header></app-header>
+
+<div class="container-fluid bg-light main-content" role="application">
   <router-outlet></router-outlet>
 </div>
-<div class="container-fluid bg-secondary" role="banner">
-  EKL Footer
+
+<div class="container-fluid bg-secondary text-center p-2" role="contentinfo">
+  <small>© {{ currentYear }} Einkaufsliste</small>
 </div>
 
 <app-login></app-login>
